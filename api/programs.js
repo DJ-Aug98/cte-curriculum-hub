@@ -36,6 +36,6 @@ module.exports = async function handler(req, res) {
     res.json({ programs });
   } catch (err) {
     console.error(err);
-    res.status(500).json({ error: 'Failed to fetch programs' });
+    res.status(500).json({ error: err.message, detail: err.toString() });
   }
 };
