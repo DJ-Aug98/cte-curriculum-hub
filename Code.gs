@@ -16,10 +16,15 @@ function doGet(e) {
 }
 
 function getPrograms() {
-  var ss      = SpreadsheetApp.getActiveSpreadsheet();
-  var sheet   = ss.getSheetByName('All Programs');
-  var data    = sheet.getDataRange().getValues();
-  var headers = data[0];
+  var ss       = SpreadsheetApp.getActiveSpreadsheet();
+  var sheet    = ss.getSheetByName('All Programs');
+  var range    = sheet.getDataRange();
+  var data     = range.getValues();
+  var richText = range.getRichTextValues();
+  var headers  = data[0];
+
+  // Columns F–K (index 5–10) hold hyperlinked documents
+  var LINK_COLS = [5, 6, 7, 8, 9, 10];
 
   var programs = [];
   for (var i = 1; i < data.length; i++) {
@@ -27,7 +32,13 @@ function getPrograms() {
     if (!row[0]) continue;
     var program = {};
     for (var j = 0; j < headers.length; j++) {
-      program[headers[j]] = String(row[j]);
+      if (LINK_COLS.indexOf(j) !== -1) {
+        var rt  = richText[i][j];
+        var url = rt ? rt.getLinkUrl() : null;
+        program[headers[j]] = url || '';
+      } else {
+        program[headers[j]] = String(row[j]);
+      }
     }
     programs.push(program);
   }
