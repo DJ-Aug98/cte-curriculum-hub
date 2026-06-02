@@ -361,19 +361,10 @@
     document.getElementById('program-count').textContent = 'Error';
   }
 
-  const GAS_URL = '/api/programs';
-
-  async function loadPrograms() {
-    try {
-      const res  = await fetch(GAS_URL);
-      const json = await res.json();
-      renderCards(json.programs || []);
-    } catch (err) {
-      showError(err);
-    }
-  }
-
-  loadPrograms();
+  google.script.run
+    .withSuccessHandler(renderCards)
+    .withFailureHandler(showError)
+    .getPrograms();
 </script>
 
 </body>

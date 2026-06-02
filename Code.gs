@@ -1,14 +1,21 @@
 // ============================================================
 //  Code.gs
-//  CCIU — CTE Curriculum Hub | Data API
+//  CCIU — CTE Curriculum Hub
 //  Container-bound script attached to the CTE Hub spreadsheet.
 //
 //  Deploy: Extensions → Apps Script → Deploy → New deployment
-//  Type: Web app | Execute as: Me | Who has access: Anyone
-//  Copy the URL → paste into index.html as GAS_URL
+//  Type: Web app | Execute as: Me
+//  Who has access: Anyone at CCIU (requires @cciu.org login)
 // ============================================================
 
 function doGet(e) {
+  return HtmlService
+    .createHtmlOutputFromFile('Index')
+    .setTitle('CTE Curriculum Hub — Chester County Technical College High School')
+    .setXFrameOptionsMode(HtmlService.XFrameOptionsMode.ALLOWALL);
+}
+
+function getPrograms() {
   var ss      = SpreadsheetApp.getActiveSpreadsheet();
   var sheet   = ss.getSheetByName('All Programs');
   var data    = sheet.getDataRange().getValues();
@@ -24,8 +31,5 @@ function doGet(e) {
     }
     programs.push(program);
   }
-
-  return ContentService
-    .createTextOutput(JSON.stringify({ programs: programs }))
-    .setMimeType(ContentService.MimeType.JSON);
+  return programs;
 }
