@@ -26,9 +26,9 @@ function getPrograms() {
   // Columns that store hyperlinked documents rather than plain text.
   // Col G = Year at a Glance, Col H = Scope and Sequence.
   var LINK_HEADERS = {
-    'Task List':        true,
-    'Scope & Sequence': true,
-    'Unit Plans':       true
+    'Task List':    true,
+    'Pacing Guide': true,
+    'Unit Plans':   true
   };
 
   var programs = [];
