@@ -23,24 +23,45 @@ function getPrograms() {
   var richText = range.getRichTextValues();
   var headers  = data[0];
 
-  // Columns F–K (index 5–10) hold hyperlinked documents
-  var LINK_COLS = [5, 6, 7, 8, 9, 10];
+  // Columns that store hyperlinked documents rather than plain text.
+  // Col G = Year at a Glance, Col H = Scope and Sequence.
+  var LINK_HEADERS = {
+    'Task List':        true,
+    'Scope & Sequence': true,
+    'Unit Plans':       true
+  };
 
   var programs = [];
   for (var i = 1; i < data.length; i++) {
     var row = data[i];
-    if (!row[0]) continue;
+    if (!row[0] || !String(row[0]).trim()) continue;
     var program = {};
     for (var j = 0; j < headers.length; j++) {
-      if (LINK_COLS.indexOf(j) !== -1) {
+      var header = headers[j].toString().trim();
+      if (LINK_HEADERS[header]) {
         var rt  = richText[i][j];
-        var url = rt ? rt.getLinkUrl() : null;
-        program[headers[j]] = url || '';
+        var url = null;
+        if (rt) {
+          url = rt.getLinkUrl();
+          if (!url) {
+            var runs = rt.getRuns();
+            for (var k = 0; k < runs.length; k++) {
+              var runUrl = runs[k].getLinkUrl();
+              if (runUrl) { url = runUrl; break; }
+            }
+          }
+        }
+        program[header] = url || '';
       } else {
-        program[headers[j]] = String(row[j]);
+        program[header] = String(row[j]);
       }
     }
     programs.push(program);
   }
   return programs;
+}
+
+function testLinks() {
+  var programs = getPrograms();
+  console.log(JSON.stringify(programs));
 }

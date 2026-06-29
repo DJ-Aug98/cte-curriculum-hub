@@ -239,6 +239,40 @@
   /* ── CARD META ROWS ── */
   .card-meta { display: flex; flex-direction: column; gap: 6px; margin-bottom: 14px; }
   .meta-row  { display: flex; flex-wrap: wrap; gap: 6px; }
+
+  /* ── HEADER LEGEND ── */
+  .header-legend {
+    flex-shrink: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    border-left: 1px solid #e0e0e0;
+    padding-left: 20px;
+  }
+  .legend-heading {
+    font-size: 9px;
+    font-weight: 700;
+    letter-spacing: 1.8px;
+    text-transform: uppercase;
+    color: #999;
+    margin-bottom: 1px;
+  }
+  .legend-item {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+  }
+  .legend-label {
+    font-size: 10px;
+    color: #777;
+    width: 90px;
+    flex-shrink: 0;
+  }
+  .legend-chips {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 4px;
+  }
 </style>
 
 </head>
@@ -251,6 +285,25 @@
     <div class="header-divider"></div>
     <div class="header-text">
       <div class="header-title">CTE Curriculum Hub</div>
+    </div>
+    <div class="header-legend">
+      <div class="legend-heading">Key</div>
+      <div class="legend-item">
+        <span class="legend-label">Campus(es)</span>
+        <div class="legend-chips"><span class="chip chip-campus">Campus</span></div>
+      </div>
+      <div class="legend-item">
+        <span class="legend-label">Status</span>
+        <div class="legend-chips">
+          <span class="chip chip-status-complete">Complete</span>
+          <span class="chip chip-status-progress">In Progress</span>
+          <span class="chip chip-status-draft">Draft</span>
+        </div>
+      </div>
+      <div class="legend-item">
+        <span class="legend-label">Program Model</span>
+        <div class="legend-chips"><span class="chip chip-model">Model</span></div>
+      </div>
     </div>
   </div>
   <div class="header-accent"></div>
@@ -274,7 +327,7 @@
 <!-- FOOTER -->
 <div class="site-footer">
   <span>CCIU &mdash; Chester County Technical College High School</span> &nbsp;&middot;&nbsp;
-  CTE Curriculum Hub &nbsp;&middot;&nbsp; Division of Learning &amp; Leadership Solutions
+  CTE Curriculum Hub
 </div>
 
 <script>
@@ -324,11 +377,9 @@
       '    </div>',
       '  </div>',
       '  <div class="card-links">',
-      '    ' + linkBtn(p['Task List'],        'Task List'),
-      '    ' + linkBtn(p['Scope &amp; Sequence'], 'Scope &amp; Seq'),
-      '    ' + linkBtn(p['Pacing Guide'],     'Pacing Guide'),
-      '    ' + linkBtn(p['Unit Plans'],       'Unit Plans'),
-      '    ' + linkBtn(p['SharePoint Docs'],  'SharePoint'),
+      '    ' + linkBtn(p['Task List'],          'Task List'),
+      '    ' + linkBtn(p['Scope & Sequence'],   'Pacing Guide'),
+      '    ' + linkBtn(p['Unit Plans'],         'Unit Plans'),
       '  </div>',
       '</div>'
     ].join('\n');
