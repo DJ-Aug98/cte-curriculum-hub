@@ -192,8 +192,9 @@
     padding: 12px 20px 16px;
     border-top: 1px solid #f0f0f0;
     display: flex;
-    flex-wrap: wrap;
+    flex-wrap: nowrap;
     gap: 6px;
+    overflow-x: auto;
   }
   .link-btn {
     font-size: 10px;
@@ -377,9 +378,10 @@
       '    </div>',
       '  </div>',
       '  <div class="card-links">',
-      '    ' + linkBtn(p['Task List'],          'Task List'),
-      '    ' + linkBtn(p['Pacing Guide'],         'Pacing Guide'),
-      '    ' + linkBtn(p['Unit Plans'],         'Unit Plans'),
+      '    ' + linkBtn(p['Task List'],              'Task List'),
+      '    ' + linkBtn(p['Pacing Guide'],           'Pacing Guide'),
+      '    ' + linkBtn(p['Unit Plans'],             'Unit Plans'),
+      '    ' + linkBtn(p['Instructional Materials'],'Instructional Materials'),
       '  </div>',
       '</div>'
     ].join('\n');
